@@ -1,3 +1,4 @@
+
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -12,46 +13,28 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="bandeira")
-public class Bandeira implements Serializable{
-    
+@Table(name="produtora")
+public class Produtora implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    
     @NotNull
-    @Column(name ="descricao")
-    @Size(min=1,max=45)
-    private String descricao;
-    
-    public Bandeira(){
+    @Column(name="nome")
+    @Size(min=1,max=100)
+    private String nome;
+
+    public Produtora() {
     }
 
-    public Bandeira(Integer id, String descricao) {
+    public Produtora(Integer id, String nome) {
         this.id = id;
-        this.descricao = descricao;
+        this.nome = nome;
     }
 
-    public Integer getId() {
-        return id;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    public String getDescricao() {
-        return descricao;
-}
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -66,10 +49,12 @@ public class Bandeira implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Bandeira other = (Bandeira) obj;
+        final Produtora other = (Produtora) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+  
+    
 }
