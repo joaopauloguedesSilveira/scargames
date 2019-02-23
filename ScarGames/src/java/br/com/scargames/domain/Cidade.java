@@ -15,24 +15,32 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="genero")
-public class Genero implements Serializable{
+@Table(name="cidade")
+public class Cidade implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+    
     @NotNull
-    @Column(name="descricao")
-    @Size(min=1,max=45)
-    private String descricao;
+    @Column(name="nome")
+    @Size(min=1,max=100)
+    private String nome;
+    
+    @NotNull
+    @Column(name="estado")
+    @Size(min=2,max=2)
+    private String estado;
     
     @OneToMany(mappedBy="id")
-    private List<Jogo> jogos;
-    public Genero() {
+    private List<Endereco> enderecos;
+    
+    public Cidade() {
     }
 
-    public Genero(Integer id, String descricao) {
+    public Cidade(Integer id, String nome, String estado) {
         this.id = id;
-        this.descricao = descricao;
+        this.nome = nome;
+        this.estado = estado;
     }
 
     public Integer getId() {
@@ -43,29 +51,37 @@ public class Genero implements Serializable{
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public List<Jogo> getJogos() {
-        return jogos;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setJogos(List<Jogo> jogos) {
-        this.jogos = jogos;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -77,12 +93,11 @@ public class Genero implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Genero other = (Genero) obj;
+        final Cidade other = (Cidade) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-    
     
 }
