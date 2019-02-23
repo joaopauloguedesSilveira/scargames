@@ -1,6 +1,7 @@
 
 package br.com.scargames.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
