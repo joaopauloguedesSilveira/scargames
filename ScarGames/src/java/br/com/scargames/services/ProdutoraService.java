@@ -14,7 +14,7 @@ import java.util.List;
  * @author aluno1
  */
 public class ProdutoraService {
-    private final ProdutoraDao produtorDao = new produtoraDao();
+    private final ProdutoraDao produtorDao = new ProdutoraDao();
     public List<Produtora> listar(){
         return produtorDao.listar();
     }
