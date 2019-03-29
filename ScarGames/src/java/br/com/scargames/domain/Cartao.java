@@ -1,4 +1,3 @@
-
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -20,16 +19,18 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="cartao")
 public class Cartao implements Serializable{
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
     @NotNull
     @Column(name="numero")
-    @Size(min=15,max=15)
+    @Size(min=16,max=16)
     private String numero;
     
     @NotNull
+    @Column(name="vencimento")
     @Temporal(TemporalType.DATE)
     private LocalDate vencimento;
     
@@ -91,11 +92,11 @@ public class Cartao implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
- 
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -116,6 +117,4 @@ public class Cartao implements Serializable{
         }
         return true;
     }
-    
-    
 }

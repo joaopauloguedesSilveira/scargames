@@ -1,5 +1,6 @@
 package br.com.scargames.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="jogo")
-public class Jogo {
+public class Jogo implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -50,6 +52,9 @@ public class Jogo {
     @JoinColumn(name="produtora_jogo_id",referencedColumnName="id")
     @ManyToOne(optional=false)
     private Produtora produtora;
+    
+    @OneToOne(mappedBy="id")
+    private Biblioteca biblioteca;
 
     public Jogo() {
     }
@@ -129,10 +134,18 @@ public class Jogo {
         this.produtora = produtora;
     }
 
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -153,5 +166,4 @@ public class Jogo {
         }
         return true;
     }
-    
 }

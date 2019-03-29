@@ -1,33 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.scargames.services;
-
 import br.com.scargames.dao.ProdutoraDao;
 import br.com.scargames.domain.Produtora;
+import br.com.scargames.util.HashMaker;
 import java.util.List;
 
-/**
- *
- * @author aluno1
- */
+
 public class ProdutoraService {
-    private final ProdutoraDao produtorDao = new ProdutoraDao();
-    public List<Produtora> listar(){
-        return produtorDao.listar();
+
+    private final ProdutoraDao produtoraDao = new ProdutoraDao();
+    
+    public List<Produtora> listar(){     
+        return produtoraDao.listar();      
     }
-    public boolean inserir(Produtora produtor){
-        return produtorDao.inserir(produtor);
+
+    public Produtora consultar(Integer id){
+        return produtoraDao.consultar(id);   
     }
-    public Produtora consulta(int id){
-        return produtorDao.consultar(id);
+
+    public boolean inserir (Produtora produtora){
+        return produtoraDao.inserir(produtora);
     }
-    public boolean alterar(Produtora produtor){
-        return produtorDao.alterar(produtor);
+
+    public Boolean alterar (Produtora produtora){
+        return produtoraDao.alterar(produtora);
     }
-    public boolean excluir(Produtora produtor){
-        return produtorDao.excluir(produtor);
+
+    public boolean excluir (Produtora produtora){
+        return produtoraDao.excluir(produtora);
     }
-}
+
+}    
+

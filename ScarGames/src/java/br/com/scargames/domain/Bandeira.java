@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,13 +22,14 @@ public class Bandeira implements Serializable{
     private Integer id;
     
     @NotNull
-    @Column(name ="descricao")
+    @Column(name="descricao")
     @Size(min=1,max=45)
     private String descricao;
     
+    @OneToMany(mappedBy="id")
     private List<Cartao> cartoes;
-    
-    public Bandeira(){
+
+    public Bandeira() {
     }
 
     public Bandeira(Integer id, String descricao) {
@@ -38,14 +40,14 @@ public class Bandeira implements Serializable{
     public Integer getId() {
         return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public String getDescricao() {
         return descricao;
-}
+    }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
@@ -58,13 +60,11 @@ public class Bandeira implements Serializable{
     public void setCartoes(List<Cartao> cartoes) {
         this.cartoes = cartoes;
     }
-
-    
     
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -85,4 +85,7 @@ public class Bandeira implements Serializable{
         }
         return true;
     }
+    
+    
+    
 }

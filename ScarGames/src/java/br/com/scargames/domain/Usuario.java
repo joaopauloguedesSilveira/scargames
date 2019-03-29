@@ -1,4 +1,3 @@
-
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -11,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,14 +31,13 @@ public class Usuario implements Serializable{
     @Size(min=1,max=100)
     private String nome;
     
-    
     @NotNull
     @Column(name="cpf")
     @Size(min=11,max=11)
     private String cpf;
     
     @NotNull
-    @Column(name="datanascimento")
+    @Column(name="dataNascimento")
     @Temporal(TemporalType.DATE)
     private LocalDate dataNascimento;
     
@@ -59,7 +58,8 @@ public class Usuario implements Serializable{
     private String email;
     
     @NotNull
-    @Size(min=6,max=20)
+    @Column(name="senha")
+    @Size(min=6,max=100)
     private String senha;
     
     @OneToMany(mappedBy="id")
@@ -67,6 +67,10 @@ public class Usuario implements Serializable{
     
     @OneToMany(mappedBy="id")
     private List<Cartao> cartoes;
+    
+    @OneToOne(mappedBy="id")
+    private Biblioteca biblioteca;
+    
     public Usuario() {
     }
 
@@ -145,10 +149,34 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public List<Cartao> getCartoes() {
+        return cartoes;
+    }
+
+    public void setCartoes(List<Cartao> cartoes) {
+        this.cartoes = cartoes;
+    }
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -169,6 +197,4 @@ public class Usuario implements Serializable{
         }
         return true;
     }
-    
-    
 }

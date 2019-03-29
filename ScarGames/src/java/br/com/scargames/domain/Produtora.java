@@ -1,4 +1,3 @@
-
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -15,18 +14,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="produtora")
+@Table(name="produtora")    
 public class Produtora implements Serializable{
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+    
     @NotNull
     @Column(name="nome")
     @Size(min=1,max=100)
     private String nome;
-
+    
     @OneToMany(mappedBy="id")
     private List<Jogo> jogos;
+
     public Produtora() {
     }
 
@@ -58,11 +60,11 @@ public class Produtora implements Serializable{
     public void setJogos(List<Jogo> jogos) {
         this.jogos = jogos;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -83,6 +85,4 @@ public class Produtora implements Serializable{
         }
         return true;
     }
-  
-    
 }

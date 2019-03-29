@@ -1,4 +1,3 @@
-
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -31,7 +30,7 @@ public class Endereco implements Serializable{
     @Column(name="numero")
     @Size(min=1,max=20)
     private String numero;
-    
+
     @Column(name="complemento")
     @Size(min=1,max=30)
     private String complemento;
@@ -53,11 +52,11 @@ public class Endereco implements Serializable{
     @JoinColumn(name="usuario_endereco_id",referencedColumnName="id")
     @ManyToOne(optional=false)
     private Usuario usuario;
-    
+
     public Endereco() {
     }
 
-    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cidade cidade, Usuario usuario, Cartao cartao) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cidade cidade, Usuario usuario) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -135,7 +134,7 @@ public class Endereco implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -156,5 +155,4 @@ public class Endereco implements Serializable{
         }
         return true;
     }
-    
 }

@@ -1,4 +1,3 @@
-
 package br.com.scargames.domain;
 
 import java.io.Serializable;
@@ -17,6 +16,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="cidade")
 public class Cidade implements Serializable{
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
@@ -33,7 +33,7 @@ public class Cidade implements Serializable{
     
     @OneToMany(mappedBy="id")
     private List<Endereco> enderecos;
-    
+
     public Cidade() {
     }
 
@@ -67,13 +67,6 @@ public class Cidade implements Serializable{
         this.estado = estado;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -81,7 +74,14 @@ public class Cidade implements Serializable{
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -99,5 +99,4 @@ public class Cidade implements Serializable{
         }
         return true;
     }
-    
 }
