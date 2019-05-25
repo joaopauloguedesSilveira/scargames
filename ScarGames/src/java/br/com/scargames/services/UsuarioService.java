@@ -6,12 +6,12 @@ import br.com.scargames.util.HashMaker;
 import java.util.List;
 
 public class UsuarioService {
+     public void inicializarHobernate(){
+        usuarioDao.inicializarHobernate();
+        
+    }
     
     private final UsuarioDao usuarioDao = new UsuarioDao();
-    
-    public void inicializarHibernate(){
-        usuarioDao.inicializarHibernate();
-    }
     
     public List<Usuario> listar(){
         return usuarioDao.listar();
