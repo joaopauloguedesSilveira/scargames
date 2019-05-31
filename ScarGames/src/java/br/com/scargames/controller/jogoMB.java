@@ -18,13 +18,13 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean(name = "jogoMB")
 @RequestScoped
-public class jogoMB {
+public class JogoMB {
     private Jogo jogo;
     private List<Jogo> jogos;
     /**
      * Creates a new instance of jogoMB
      */
-    public jogoMB() {
+    public JogoMB() {
         this.listar();
     }
     
