@@ -6,12 +6,12 @@ import br.com.scargames.util.HashMaker;
 import java.util.List;
 
 public class UsuarioService {
-     public void inicializarHobernate(){
-        usuarioDao.inicializarHobernate();
-        
-    }
     
     private final UsuarioDao usuarioDao = new UsuarioDao();
+    
+    public void inicializarHibernate(){
+        usuarioDao.inicializarHibernate();
+    }
     
     public List<Usuario> listar(){
         return usuarioDao.listar();
@@ -35,6 +35,7 @@ public class UsuarioService {
     }
     
     public Boolean autenticar(Usuario usuario){
+        System.out.println(HashMaker.stringHexa(HashMaker.gerarHash(usuario.getSenha())));
         Usuario usuarioBanco = usuarioDao.consultarPorEmail(usuario.getEmail());
         if (usuarioBanco == null){
             return false;

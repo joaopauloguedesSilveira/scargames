@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="titleWindow">ScarGames - Jogos</ui:define>
+        <ui:define name="content">
+            <div class="ui-g">
+                <div class="ui-g-1"></div>
+                <div class="ui-g-10">
+                    <h1>Cadastro de Jogos</h1>
+                </div>
+                <div class="ui-g-1"></div>
+                
+              
+                
+                <div class="ui-g-5">
+                    <p:inputText id="titulo" placeholder="Título"
+                                 value="#{jogoMB.jogo.titulo}"
+                                 style="width: 90%;"/>
+                </div>
+               
+                
+                
+                <div class="ui-g-5">
+                    <p:selectOneMenu id="classificacao" value="#{jogoMB.jogo.classificacao}" style="width:95%"
+                                     placeholder="Classificação">
+                        <f:selectItem itemLabel="Maior de 18" itemValue="18" />
+                        <f:selectItem itemLabel="Maior de 16" itemValue="16" />
+                        <f:selectItem itemLabel="Maior de 12" itemValue="18" />
+                        <f:selectItem itemLabel="Maior de 10" itemValue="10" />
+                        <f:selectItem itemLabel="Livre" itemValue="0" />                        
+                    </p:selectOneMenu>
+                </div>
+                
+                <div class="ui-g-1"></div>
+                <div class="ui-g-5">
+                    <p:inputText id="requisitos" placeholder="Requisitos"
+                                 value="#{jogoMB.jogo.requisitos}"
+                                 style="width: 90%;"/>
+                </div>
+                
+                <div class="ui-g-5">
+                    <p:inputNumber id="nota" placeholder="Nota" 
+                                 value="#{jogoMB.jogo.nota}"  
+                                 decimalPlaces="1"       
+                                 style="width: 100%;"/>
+                      
+                 
+                </div>
+                
+                <div class="ui-g-5">
+                    <p:inputNumber id="preco" placeholder="Preço"
+                                 value="#{jogoMB.jogo.preco}"
+                                 decimalPlaces="2"
+                                 style="width: 205%;"/>
+                </div>
+                
+                
+                <div class="ui-g-10">
+                <p:inputTextarea id="sinopse" placeholder="Sinopse" 
+                rows="5" cols="40" value="#{jogoMB.jogo.sinopse}"
+                style="width: 100%;" />
+                </div>
+                
+                
+   
+                
+                
+                <div class="ui-g-5">
+                    <p:selectOneMenu id="genero" value="#{jogoMB.jogo.genero}" style="width:90%"
+                                     placeholder="Gênero" converter="entityConverter">
+                        <f:selectItems value="#{generoMB.generos}" 
+                                       var="genero" itemLabel="#{genero.descricao}"
+                                       itemValue="#{genero}"/>
+                                               
+                    </p:selectOneMenu>
+                </div>
+                
+                <div class="ui-g-5">
+                    <p:selectOneMenu id="produtora" value="#{jogoMB.jogo.produtora}" style="width:90%"
+                                     placeholder="Produtora" converter="entityConverter">
+                        <f:selectItems value="#{produtoraMB.produtoras}" 
+                                       var="produtora" itemLabel="#{produtora.nome}"
+                                       itemValue="#{produtora}"/>
+                                               
+                    </p:selectOneMenu>
+                </div>
+
+                
+ 
+                
+                <div class="ui-g-1"></div>
+            </div>
+            <div align="center" style="margin-top: 20px;">
+                <p:commandButton value="Salvar" icon="ui-icon-check"  
+                                 action="#{jogoMB.inserir()}"
+                                 style="width: 150px; margin-right: 20px;"
+                                 update="growl"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-close" 
+                                 action="#{jogoMB.cancelar()}" 
+                                 immediate="true" style="width: 150px;"/>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

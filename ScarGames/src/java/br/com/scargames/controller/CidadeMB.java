@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.scargames.controller;
 
 import br.com.scargames.domain.Cidade;
@@ -13,13 +8,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author aluno1
- */
 @ManagedBean(name = "cidadeMB")
 @SessionScoped
-public class CidadeMB implements Serializable {
+public class CidadeMB implements Serializable{
+
     private Cidade cidade;
     private List<Cidade> cidades;
     
@@ -31,6 +23,7 @@ public class CidadeMB implements Serializable {
         CidadeService service = new CidadeService();
         cidades = service.listar();
     }
+    
     public String novo(){
         cidade = new Cidade();
         return "new.xhtml?faces-redirect=true";
@@ -38,13 +31,12 @@ public class CidadeMB implements Serializable {
     
     public String inserir(){
         CidadeService service = new CidadeService();
-
         if (service.inserir(cidade)){
-            UtilMessages.messageInfo("Cidade cadastrada com sucesso");
+            UtilMessages.messageInfo("Cidade cadastrada com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao cadastrar a cidade");
+            UtilMessages.messageError("Ocorreu um erro ao cadastrar cidade!");
             return null;
         }
     }
@@ -52,11 +44,11 @@ public class CidadeMB implements Serializable {
     public String alterar(){
         CidadeService service = new CidadeService();
         if (service.alterar(cidade)){
-            UtilMessages.messageInfo("Cidade alterada com sucesso");
+            UtilMessages.messageInfo("Cidade alterada com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao alterar a cidade");
+            UtilMessages.messageError("Ocorreu um erro ao alterar cidade!");
             return null;
         }
     }
@@ -69,26 +61,17 @@ public class CidadeMB implements Serializable {
     public String excluir(Cidade cidade){
         CidadeService service = new CidadeService();
         if (service.excluir(cidade)){
-            UtilMessages.messageInfo("Cidade excluida com sucesso");
+            UtilMessages.messageInfo("Cidade excluída com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao excluir a cidade");
+            UtilMessages.messageError("Erro ao excluir Cidade!");
             return null;
-            
         }
     }
     
     public String cancelar(){
         return "list.xhtml?faces-redirect=true";
-    }
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
     }
 
     public List<Cidade> getCidades() {
@@ -98,6 +81,12 @@ public class CidadeMB implements Serializable {
     public void setCidades(List<Cidade> cidades) {
         this.cidades = cidades;
     }
-    
-    
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 }

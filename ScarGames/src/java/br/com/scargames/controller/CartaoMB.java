@@ -1,91 +1,107 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.scargames.controller;
 
 import br.com.scargames.domain.Cartao;
 import br.com.scargames.services.CartaoService;
 import br.com.scargames.util.UtilMessages;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javafx.scene.chart.PieChart.Data;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import org.primefaces.PrimeFaces;
 
-/**
- *
- * @author aluno1
- */
 @ManagedBean(name = "cartaoMB")
 @SessionScoped
-public class CartaoMB {
+public class CartaoMB implements Serializable{
 
-    private Cartao cartao = new Cartao();
-    private List<Cartao> cartoes;
-    private CartaoService service;
+    private Cartao cartao;
+    private List<Cartao> cartaos;
+    
+    private Date data;
+    
+   
     
     public CartaoMB() {
-        service = new CartaoService();
-        cartoes = service.listar();
+        this.listar();
     }
     
-    public void novo(){
+    public void listar(){
+        CartaoService service = new CartaoService();
+        cartaos = service.listar();
+    }
+    
+    public String novo(){
         cartao = new Cartao();
-        
+        return "new.xhtml?faces-redirect=true";
     }
     
-    public void inserir(){
-        
+    public String inserir(){
+        CartaoService service = new CartaoService();
         if (service.inserir(cartao)){
-            UtilMessages.messageInfo("Genero cadastrada com sucesso");
-            cartoes = service.listar();
-            PrimeFaces current = PrimeFaces.current();
+            UtilMessages.messageInfo("Cartao cadastrada com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao cadastrar a Cartao");
+            UtilMessages.messageError("Ocorreu um erro ao cadastrar cartao!");
+            return null;
         }
     }
     
-    public void carregarDados(Cartao cartao){
+    public String alterar(){
+        CartaoService service = new CartaoService();
+        if (service.alterar(cartao)){
+            UtilMessages.messageInfo("Cartao alterado com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true";
+        }else{
+            UtilMessages.messageError("Ocorreu um erro ao alterar cartao!");
+            return null;
+        }
+    }
+    
+    public String carregarDados(Cartao cartao){
         this.cartao = cartao;
+        return "alter.xhtml?faces-redirect=true";
     }
     
-    public void excluir(Cartao cartao){
+    public String excluir(Cartao cartao){
+        CartaoService service = new CartaoService();
         if (service.excluir(cartao)){
-            UtilMessages.messageInfo("Cartao excluida com sucesso");
-            cartoes = service.listar();
+            UtilMessages.messageInfo("Cartao excluída com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao excluir a gênero");
-           
-            
+            UtilMessages.messageError("Erro ao excluir Cartao!");
+            return null;
         }
     }
     
-    
-    public Cartao getGenero() {
+    public String cancelar(){
+        return "list.xhtml?faces-redirect=true";
+    }
+
+    public List<Cartao> getCartaos() {
+        return cartaos;
+    }
+
+    public void setCartaos(List<Cartao> cartaos) {
+        this.cartaos = cartaos;
+    }
+
+    public Cartao getCartao() {
         return cartao;
     }
 
-    public void setGenero(Cartao genero) {
-        this.cartao = genero;
-    }
-
-    public CartaoService getGeneroService() {
-        return service;
-    }
-
-    public void setGeneroService(CartaoService generoService) {
-        this.service = generoService;
-    }
-
-    public List<Cartao> getGeneros() {
-        return cartoes;
-    }
-
-    public void setGeneros(List<Cartao> generos) {
-        this.cartoes = generos;
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
     
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 }
+

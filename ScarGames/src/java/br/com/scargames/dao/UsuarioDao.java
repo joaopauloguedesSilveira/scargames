@@ -6,8 +6,8 @@ import java.util.List;
 import org.hibernate.Session;
 
 public class UsuarioDao {
-    //void retorna nada
-    public void inicializarHobernate(){
+    
+    public void inicializarHibernate(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.getTransaction().commit();

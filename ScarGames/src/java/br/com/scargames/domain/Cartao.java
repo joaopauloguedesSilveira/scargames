@@ -24,7 +24,7 @@ public class Cartao implements Serializable{
     
     @NotNull
     @Column(name="numero")
-    @Size(min=20,max=20)
+    @Size(min=1,max=20)
     private String numero;
     
     @NotNull
