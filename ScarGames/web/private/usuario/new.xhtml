@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="titleWindow">ScarGames - Usuario</ui:define>
+        <ui:define name="content">
+            <div class="ui-g">
+                <div class="ui-g-1"></div>
+                <div class="ui-g-10">
+                    <h1>Cadastro de Usuarios</h1>
+                </div>
+                <div class="ui-g-1"></div>
+                
+                <div class="ui-g-1"></div>
+                <div class="ui-g-10">
+                    <p:inputText id="nome" placeholder="Nome"
+                                 value="#{usuarioMB.usuario.nome}"
+                                 style="width: 95%;"/>
+                    <p:inputText id="email" placeholder="Emeail"
+                                 value="#{usuarioMB.usuario.email}"/>
+                </div>
+                <div class="ui-g-1"></div>
+                <div class="ui-g-5">
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                        <p:outputLabel for="console" value="Console:" />
+                        <p:selectOneRadio id="console" value="#{usuarioMB.usuario.sexo}">
+                            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+                </div>
+                <div class="ui-g-5">
+                    <p:inputMask id="CPF" placeholder="CPF" 
+                                 value="#{usuarioMB.usuario.cpf}" mask="999.999.999-99"
+                                 style="width: 90%;"/>
+                </div>
+                <div class="ui-g-5">
+                    <p:calendar id="vencimento" placeholder="Vencimentos"
+                                value="#{usuarioMB.usuario.dataNascimento}" pattern="dd-MM-yyyy" mask="true"
+                                 style="width: 150%;"/>
+                </div>
+                <div class="ui-g-5">
+                    <p:inputMask id="Telefone" placeholder="Telefone" 
+                                 value="#{usuarioMB.usuario.telefone}" mask="(99) 99999-9999"
+                                 style="width: 90%;"/>
+                </div>
+                <div class="ui-g-5">
+                    <p:password id="turkishFeedback" value="#{usuarioMB.senha}" feedback="true"
+                                promptLabel="Lütfen şifre giriniz" weakLabel="Zayıf"
+                                goodLabel="Orta seviye" strongLabel="Güçlü" />
+                </div>
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"/>
+
+                    <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Endereços
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+
+                        <p:column headerText="Id">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Year">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Brand">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.brand}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Color">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:35px">
+                            <p:rowEditor />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                
+            </div>
+            <div align="center" style="margin-top: 20px;">
+                <p:commandButton value="Salvar" icon="ui-icon-check"  
+                                 action="#{bandeiraMB.inserir()}"
+                                 style="width: 150px; margin-right: 20px;"
+                                 update="growl"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-close" 
+                                 action="#{bandeiraMB.cancelar()}" 
+                                 immediate="true" style="width: 150px;"/>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

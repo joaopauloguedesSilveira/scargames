@@ -1,16 +1,16 @@
 package br.com.scargames.controller;
 
+import br.com.scargames.domain.Endereco;
 import br.com.scargames.domain.Usuario;
-import br.com.scargames.domain.Usuario;
-import br.com.scargames.domain.Usuario;
-import br.com.scargames.services.UsuarioService;
 import br.com.scargames.services.UsuarioService;
 import br.com.scargames.util.UtilMessages;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 @ManagedBean(name = "usuarioMB")
 @SessionScoped
@@ -32,6 +32,10 @@ public class UsuarioMB implements Serializable{
     public void inicializarHibernate(){
         UsuarioService service = new UsuarioService();
         service.inicializarHibernate();
+    }
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Endereço Editado", ((Endereco) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     public String autenticar(){
