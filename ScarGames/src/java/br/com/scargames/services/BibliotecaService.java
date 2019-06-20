@@ -7,10 +7,15 @@ import java.util.List;
 
 public class BibliotecaService {
 
-    private final BibliotecaDao bibliotecaDao = new BibliotecaDao();
+    BibliotecaDao bibliotecaDao = new BibliotecaDao();
     
     public List<Biblioteca> listar(){     
-        return bibliotecaDao.listar();      
+        return bibliotecaDao.listar();   
+        
+    }
+    
+    public List<Biblioteca> listaPorUsuario(Integer id){
+        return bibliotecaDao.listaPorUsuario(id);
     }
 
     public Biblioteca consultar(Integer id){
