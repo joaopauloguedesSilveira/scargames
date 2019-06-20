@@ -5,11 +5,10 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="templates/template.xhtml">
         <ui:define name="titleWindow">ScarGames</ui:define>
-        <p:galleria value="#{imagensMB.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-        <p:graphicImage name="web\resources\img\Jogos#{image}" alt="Image Description for #{image}" title="#{image}"/>
-        </p:galleria>
         <ui:define name="content">
-            
+            <p:galleria value="#{imagesView.images}" var="images" panelWidth="500" panelHeight="313" showCaption="true">
+               <p:graphicImage url="../resources/imagess/#{images}" alt="Image Description for #{images}" title="#{images}"/>
+            </p:galleria> 
         </ui:define>
     </ui:composition>
 </html>
